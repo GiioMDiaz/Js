@@ -5,7 +5,7 @@ La fundación debe tener dos parámetros:
 ***Segundo parametro es una funcion que retorne un booleano, que se tiene que aplicar al objeto del primer parámetro */
 
 function returnFalsy(arr, type) {
-    debugger
+    
     for (var values in arr) {
         if (type(arr[values])) {
             delete arr[values];
