@@ -8,20 +8,14 @@ La función debe tener 2 parámetros:
 ***Segundo parámetro debe ser un número especificando la cantidad de dígitos a los que se debe truncar el resultado 
 (esto se puede hacer con Number.prototype.toPrecision()). Por defecto, este parámetro debe de tener un valor de 3.*/
 
-function covert(num1, num2 = 3) {
-
-
-    if(num1 >= 1208925819614629174706176) { num1 = (num1 / 1208925819614629174706176).toPrecision(num2) + " YB"; }
-    else if (num1 >= 1180591620717411303424) { num1 = (num1 / 1180591620717411303424).toPrecision(num2) + " ZB"; }
-    else if (num1 >= 1152921504606846976) { num1 = (num1 / 1152921504606846976).toPrecision(num2) + " EB"; }
-    else if (num1 >= 1125899906842624) { num1 = (num1 / 1125899906842624).toPrecision(num2) + " PB"; }
-    else if (num1 >= 1099511627776) { num1 = (num1 / 1099511627776).toPrecision(num2) + " TB"; }
-    else if (num1 >= 1073741824) { num1 = (num1 / 1073741824).toPrecision(num2) + " GB"; }
-    else if (num1 >= 1048576) { num1 = (num1 / 1048576).toPrecision(num2) + " MB"; }
-    else if (num1 >= 1024) { num1 = (num1 / 1024).toFixed(2) + " KB"; }
-    else if (num1 > 1) { num1 = bytes + " bytes"; }
-    else if (num1 == 1) { num1 = bytes + " byte"; }
-    else { num1 = "0 bytes"; }
-    return bytes;
+function bytesToSize(bytes, num2) {
+    var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', "PB", "EB", "ZB", "YB"];
+    if (bytes == 0) return '0 Bytes';
+    if (bytes == 1) return "1 Byte";
+    if (bytes < 0) return "El numero ingresado no puede ser negativo"
+    let i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+    const result = (bytes / Math.pow(1024, i)).toPrecision(num2 + 1) + ' ' + sizes[i];
+    return result
 }
-console.log(formatSizeUnits())
+bytes = 6516516516
+console.log(bytesToSize(bytes, 2)); 
